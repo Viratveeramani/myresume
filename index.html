@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Transforming Raw Data into Business Gold</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      background: linear-gradient(135deg, #181829 60%, #2c003e 100%);
+      color: #f3f3f3;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* --- Top Panel --- */
+    .top-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(20, 20, 35, 0.15);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      text-align: center;
+      padding: 16px 0;
+      font-size: 1.6em;
+      font-weight: 700;
+      letter-spacing: 1px;
+      z-index: 30;
+      box-shadow: 0 4px 25px rgba(255, 60, 60, 0.4);
+      text-shadow: 0 0 8px rgba(255, 60, 60, 0.65);
+    }
+    .top-panel .highlight { color: #ff3c3c; }
+
+    /* --- Main Container --- */
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 100px 50px 40px 90px;
+      min-height: 80vh;
+      z-index: 2;
+      transition: opacity 0.5s;
+      position: relative;
+      padding-right: 200px;
+    }
+    .hidden { opacity: 0; pointer-events: none; }
+    .main-content {
+      max-width: 600px;
+      background: rgba(40, 40, 60, 0.35);
+      padding: 28px 32px;
+      border-radius: 18px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 40px rgba(0,0,0,0.45);
+    }
+    h1 {
+      font-size: 2.8em;
+      font-weight: 700;
+      margin: 0 0 20px 0;
+      line-height: 1.15;
+    }
+    .highlight { color: #ff3c3c; }
+    .desc { font-size: 1.1em; margin-bottom: 38px; color: #b0aeb3; }
+    .projects-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background: rgba(30, 29, 34, 0.7);
+      border: 2px solid #ff3c3c;
+      border-radius: 25px;
+      color: #ff3c3c;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.22s, color .22s;
+      cursor: pointer;
+    }
+    .projects-btn:hover { background: #ff3c3c; color: #fff; }
+
+    /* --- Avatar --- */
+    .avatar-wrap {
+      position: absolute;
+      right: 200px; /* moved slightly left */
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+    .avatar {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: drop-shadow(0 0 20px #ff3c3c75);
+      border: 5px solid #232238;
+      background-image: url("AA.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow: 0 0 80px 10px #7b1fa267;  
+      display: block;
+    }
+
+    /* --- Sidebar --- */
+    .sidebar {
+      position: fixed;
+      top: 100px;
+      right: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 23px;
+      z-index: 20;
+    }
+    .sidebar-btn {
+      width: 54px;
+      height: 54px;
+      background: #232238;
+      border: none;
+      border-radius: 13px;
+      color: #fff;
+      font-size: 1.7em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px #23223833;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+      animation: glowPulse 3s infinite ease-in-out;
+      position: relative;
+    }
+    .sidebar-btn:hover {
+      background: #ff3c3c;
+      color: #fff;
+      box-shadow: 0 0 30px #ff3c3c, 0 0 60px #ff3c3c88;
+      transform: scale(1.15);
+      animation-play-state: paused;
+    }
+    .sidebar-btn.active {
+      background: #ff3c3c;
+      color: #fff;
+      box-shadow: 0 0 50px #ff3c3c, 0 0 80px #ff3c3cbb;
+      transform: scale(1.2);
+      animation-play-state: paused !important;
+      z-index: 30;
+    }
+    @keyframes glowPulse {
+      0%, 100% {
+        box-shadow: 0 0 5px #ff3c3c, 0 0 10px #ff3c3c88;
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 15px #ff3c3cdd, 0 0 25px #ff3c3cbb;
+        transform: scale(1.1);
+      }
+    }
+    @keyframes clickPop {
+      0% {
+        transform: scale(1.2);
+        box-shadow: 0 0 50px #ff3c3c, 0 0 80px #ff3c3cbb;
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px #ff3c3c, 0 0 60px #ff3c3c88;
+      }
+    }
+
+    /* --- Panels --- */
+    .slide {
+      position: fixed;
+      top: 0; right: -100%;
+      width: 100%; height: 100%;
+      background: rgba(15, 15, 25, 0.96);
+      padding: 100px 60px;
+      box-sizing: border-box;
+      transition: right 0.6s ease-in-out;
+      z-index: 15;
+      overflow-y: auto;
+    }
+    .slide.active { right: 0; }
+    .slide h2 { font-size: 2.3em; margin-bottom: 20px; color: #ff3c3c; }
+    .slide h3 { font-size: 1.6em; margin-top: 30px; color: #ff3c3c; }
+    .slide p { font-size: 1.1em; color: #ddd; max-width: 850px; line-height: 1.4; }
+    .close-btn {
+      position: absolute;
+      top: 28px;
+      right: 40px;
+      font-size: 2em;
+      background: none;
+      border: none;
+      color: #ff3c3c;
+      cursor: pointer;
+      z-index: 30;
+      transition: color 0.18s;
+    }
+    .close-btn:hover { color: #fff; }
+
+    /* --- Contact Icons --- */
+    .social-links {
+      display: flex;
+      gap: 26px;
+      margin-top: 25px;
+      font-size: 2.2em; /* bigger */
+    }
+    .social-links a {
+      color: #ddd;
+      transition: color 0.25s, transform 0.25s;
+    }
+    .social-links a:hover {
+      color: #ff3c3c;
+      transform: scale(1.25);
+      text-shadow: 0 0 15px #ff3c3cbb;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <div class="top-panel">
+    Veeramanikandan <span class="highlight">G</span>
+  </div>
+
+  <!-- Home Section -->
+  <div id="home-section" class="container">
+    <div class="main-content">
+      <h1>Transforming Raw Data into<br />Into <span class="highlight">Business Gold</span></h1>
+      <div class="desc">
+        Creative Data-Analyst turning raw data into actionable insights and business growth.
+      </div>
+      <a class="projects-btn" href="#" onclick="openSlide('projects');return false;">My Projects &gt;</a>
+      <a class="projects-btn" href="https://drive.google.com/file/d/1qbKERir40K9FsX9EXReD7N22ID97DYw2/view?usp=sharing" target="_blank" style="margin-left:16px;">Download Resume</a>
+    </div>
+    <div class="avatar-wrap">
+      <img src="https://drive.google.com/uc?export=view&id=1w5Ifui8UzKrNylWeGdsyAcDLnMErIfNI" alt="Avatar" class="avatar"/>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <button class="sidebar-btn" onclick="clickButton(this,'home');goHome()" title="Home"><i class="fas fa-home"></i></button>
+    <button class="sidebar-btn" onclick="clickButton(this,'about');openSlide('about')" title="About"><i class="fas fa-user"></i></button>
+    <button class="sidebar-btn" onclick="clickButton(this,'keyskills');openSlide('keyskills')" title="Key Skills"><i class="fas fa-brain"></i></button>
+    <button class="sidebar-btn" onclick="clickButton(this,'professional');openSlide('professional')" title="Professional Experience"><i class="fas fa-briefcase"></i></button>
+    <button class="sidebar-btn" onclick="clickButton(this,'projects');openSlide('projects')" title="Projects"><i class="fas fa-file-alt"></i></button>
+    <button class="sidebar-btn" onclick="clickButton(this,'contact');openSlide('contact')" title="Contact"><i class="fas fa-envelope"></i></button>
+  </div>
+
+  <!-- About -->
+  <div id="about" class="slide">
+    <button class="close-btn" onclick="goHome()" title="Close">&times;</button>
+    <h2>About Me</h2>
+    <p>I’m a creative and detail-oriented Data Analyst passionate about transforming raw data into meaningful insights. With strong skills in Excel, SQL, Power BI, and data visualization, I enjoy uncovering patterns, solving complex problems, and helping businesses make smarter decisions. I thrive at the intersection of analytics and creativity, where I can turn numbers into clear stories that drive growth and innovation.</p>
+  </div>
+
+  <!-- Key Skills -->
+  <div id="keyskills" class="slide">
+    <button class="close-btn" onclick="goHome()" title="Close">&times;</button>
+    <h2>Key Skills</h2>
+    <h3>Languages & Tools:</h3><p>SQL, Python, Excel, MySQL, Power BI</p>
+    <h3>Platforms:</h3><p>PowerPoint, Jupyter Notebook, PyCharm</p>
+    <h3>Soft Skills:</h3><p>Communication, Problem-Solving, Critical Thinking, Collaboration, Adaptability, Time Management</p>
+  </div>
+
+  <!-- Professional Experience -->
+  <div id="professional" class="slide">
+    <button class="close-btn" onclick="goHome()" title="Close">&times;</button>
+    <h2>Professional Experience</h2>
+    <h3>Team Leader | Allset Business Solutions – SBI Credit Card Collection (Bucket 1–6), Tirupur | Jan 2024 – Jul 2025</h3>
+    <p>Led a team handling SBI credit card collections across multiple buckets (1–6), ensuring compliance and achieving recovery targets.</p>
+    <h3>Team Leader | Allset Business Solutions – Kotak Credit Card Collection (Recovery), Tirupur | Oct 2021 – Jan 2024</h3>
+    <p>Supervised recovery operations for Kotak credit card collections, improving resolution efficiency and team performance.</p>
+    <h3>CNC Operator | Lucas TVS Ltd, Chennai | Apr 2017 – Oct 2018</h3>
+    <p>Operated and maintained CNC machines, ensuring precision manufacturing and quality output.</p>
+  </div>
+
+  <!-- Projects -->
+  <div id="projects" class="slide">
+    <button class="close-btn" onclick="goHome()" title="Close">&times;</button>
+    <h2>My Projects</h2>
+    <div class="project">
+      <h3>🚀 HR Dashboard – Power BI</h3>
+      <p>A custom Interactive HR Dashboard in Power BI providing insights on workforce, attrition, and employee performance.</p>
+      <a class="projects-btn" href="https://github.com/Viratveeramani/POWER-BI---PROJECTS-FOR-PORTFOLIO/blob/main/dash%20board%20of%20%20HR_dashboard.png" target="_blank">View Project</a>
+    </div>
+    <div class="project">
+      <h3>🛒 CREDIT CARD Dashboard - Power BI - SQL</h3>
+      <p>Credit Card Dashboard using SQL and Power BI to analyze transactions, spending patterns, and customer insights.</p>
+      <a class="projects-btn" href="https://github.com/Viratveeramani/POWER-BI---PROJECTS-FOR-PORTFOLIO/blob/main/dash%20board%20of%20credit%20card.png" target="_blank">View Project</a>
+    </div>
+    <div class="project">
+      <h3>📶 Sales Dashboard - Power BI - SQL </h3>
+      <p>Sales Dashboard using SQL and Power BI to track revenue, profit, and sales performance across regions and products.</p>
+      <a class="projects-btn" href="https://github.com/Viratveeramani/POWER-BI---PROJECTS-FOR-PORTFOLIO/blob/main/dash%20board%20of%20Sales.png" target="_blank">View Project</a>
+    </div>
+  </div>
+
+  <!-- Contact -->
+<div id="contact" class="slide">
+  <button class="close-btn" onclick="goHome()" title="Close">&times;</button>
+  <h2>Contact Me</h2>
+  <p>Let’s connect! You can reach me via email or check out my professional profiles below:</p>
+
+  <div class="social-links">
+    <!-- GitHub -->
+    <a href="https://github.com/Viratveeramani" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+
+    <!-- LinkedIn -->
+    <a href="https://linkedin.com/in/veeramanikandan0678/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+  </div>
+
+  <!-- Email and Location lined up horizontally -->
+  <div style="display: flex; flex-wrap: wrap; gap: 28px; margin-top: 25px;">
+    <div style="display: flex; align-items: center; gap: 10px; color: #ff3c3c; font-size: 1.15em; text-shadow: 0 0 12px #ff3c3c;">
+      <i class="fas fa-envelope" aria-hidden="true"></i>
+      <a href="mailto:vmani0678@gmail.com" style="color: inherit; text-decoration: none;">vmani0678@gmail.com</a>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; color: #ff3c3c; font-size: 1.15em; text-shadow: 0 0 12px #ff3c3c;">
+      <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+      <a href="https://www.google.com/maps/place/Coimbatore,+Tamil+Nadu" target="_blank" style="color: inherit; text-decoration: none;">
+        Coimbatore, Tamil Nadu
+      </a>
+    </div>
+  </div>
+</div>
+
+  <!-- Scripts -->
+  <script>
+    function openSlide(id) {
+      document.getElementById("home-section").classList.add("hidden");
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+    function goHome() {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.getElementById("home-section").classList.remove("hidden");
+    }
+    function clickButton(btn) {
+      document.querySelectorAll('.sidebar-btn').forEach(b => {
+        b.classList.remove('active');
+        b.style.animation = 'glowPulse 3s infinite ease-in-out';
+      });
+      btn.classList.add('active');
+      btn.style.animation = 'clickPop 0.3s ease forwards';
+      setTimeout(() => {
+        btn.style.animation = 'glowPulse 3s infinite ease-in-out';
+      }, 300);
+    }
+  </script>
+</body>
+</html>
