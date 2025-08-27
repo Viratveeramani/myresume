@@ -210,6 +210,89 @@
       transform: scale(1.25);
       text-shadow: 0 0 15px #ff3c3cbb;
     }
+    /* --- ADDED RESPONSIVE MEDIA QUERIES BELOW --- */
+
+    /* Mobile Phones: max width 600px */
+    @media (max-width: 600px) {
+      .container {
+        flex-direction: column;
+        padding: 90px 16px 24px 16px;
+        min-height: auto;
+        align-items: flex-start;
+        padding-right: 16px;
+      }
+      .avatar-wrap {
+        position: static;
+        transform: none;
+        margin: 24px auto 0 auto;
+        right: auto;
+        top: auto;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+      .avatar {
+        width: 170px;
+        height: 170px;
+        margin: 0 auto;
+      }
+      .sidebar {
+        position: fixed;
+        top: unset;
+        bottom: 10px;
+        right: 10px;
+        flex-direction: row;
+        gap: 12px;
+        width: 100%;
+        justify-content: center;
+      }
+      .main-content {
+        max-width: 96%;
+        padding: 18px 8px;
+      }
+      .slide {
+        padding: 90px 10px 20px 10px;
+        font-size: 0.95em;
+      }
+      .slide h2, .slide h3 {
+        font-size: 1.4em;
+      }
+    }
+
+    /* Tablets: max width 900px */
+    @media (max-width: 900px) {
+      .container {
+        padding: 90px 25px 24px 25px;
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: auto;
+        padding-right: 25px;
+      }
+      .avatar-wrap {
+        position: static;
+        margin: 30px auto 0 auto;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      .avatar {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+      }
+      .main-content {
+        max-width: 98%;
+        padding: 18px 18px;
+      }
+      .slide {
+        padding: 90px 15px 20px 15px;
+        font-size: 1em;
+      }
+    }
+    
   </style>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
