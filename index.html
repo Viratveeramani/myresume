@@ -5,14 +5,44 @@
   <title>Transforming Raw Data into Business Gold</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body {
+      body {
+      padding-top: 56px;
       margin: 0;
-      font-family: 'Poppins', Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background: linear-gradient(135deg, #181829 60%, #2c003e 100%);
       color: #f3f3f3;
-      min-height: 100vh;
+      font-family: 'Poppins', Arial, sans-serif;
       overflow-x: hidden;
-      position: relative;
+    }
+    .top-panel {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      background: rgba(20, 20, 35, 0.15);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: 700;
+      line-height: 56px;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 20px rgba(255, 60, 60, 0.4);
+      text-shadow: 0 0 6px rgba(255, 60, 60, 0.65);
+      z-index: -100;
+    }
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      min-height: calc(100vh - 56px);
+      padding: 0 40px;
+      width: 100%;
+      max-width: 1100px;
+      box-sizing: border-box;
     }
 
     /* --- Top Panel --- */
@@ -50,6 +80,9 @@
     .hidden { opacity: 0; pointer-events: none; }
     .main-content {
       max-width: 600px;
+      margin-top: -40px;   /* Moves the box up by 20px */
+      margin-bottom: 0; 
+      margin-left: -390px;
       background: rgba(40, 40, 60, 0.35);
       padding: 28px 32px;
       border-radius: 18px;
@@ -86,20 +119,32 @@
       transform: translateY(-50%);
       z-index: 10;
     }
-    .avatar {
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      object-fit: cover;
-      filter: drop-shadow(0 0 20px #ff3c3c75);
-      border: 5px solid #232238;
-      background-image: url("AA.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      box-shadow: 0 0 80px 10px #7b1fa267;  
-      display: block;
-    }
+    
+.avatar-wrapper {
+  display: inline-block;
+  position: relative;
+  border-radius: 50%;
+  padding: 20px; /* Space for outermost border */
+  background: radial-gradient(circle, #7b1fa2 50%, #232238 100%);
+  border: 10px solid #43ea63; /* Outermost border color */
+  box-sizing: content-box;
+}
+
+.avatar {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-image: url("AA.jpg"); /* Your photo */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 80px 10px #7b1fa267;
+  display: block;
+}
+
 
     /* --- Sidebar --- */
     .sidebar {
@@ -292,7 +337,59 @@
         font-size: 1em;
       }
     }
-    
+     /* Typing Animation for Business Gold */
+.typing {
+  display: inline-block;
+  overflow: hidden;
+  border-right: 3px solid #ff3c3c; /* Blinking cursor */
+  white-space: nowrap;
+  vertical-align: bottom; /* Fix alignment issue */
+  font-weight: 700;
+  font-size: 1em; /* Adjust to match heading */
+  animation: typing 0.9s steps(18, end) infinite alternate,
+             blink 0.7s step-end infinite;
+  color: #ff3c3c;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 15ch } /* Adjust length (characters in "Business Gold" = 15) */
+}
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
+
+  .circle-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: auto;
+}
+
+.rotating-circle {
+  position: absolute;
+  top: -14.5px;
+  right:900;
+  left: 935px;     /* remove or set auto to avoid conflict */
+  width: 330px;
+  height: 330px;  
+  border-radius: 50%;
+  border: 6px solid #e22020;
+  border-top: 5px solid transparent;
+  box-sizing: border-box;
+  animation: rotateCircle 2s linear infinite;
+  transform-origin: 50% 50%;
+
+}
+
+
+@keyframes rotateCircle {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
   </style>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -301,11 +398,15 @@
   <div class="top-panel">
     Veeramanikandan <span class="highlight">G</span>
   </div>
+  <div class="circle-container">
+  <div class="rotating-circle"></div>
+</div>
+
 
   <!-- Home Section -->
   <div id="home-section" class="container">
     <div class="main-content">
-      <h1>Transforming Raw Data into<br />Into <span class="highlight">Business Gold</span></h1>
+      <h1>Transforming Raw Data <br />Into <span class="typing">Business Gold</span></h1>
       <div class="desc">
         Creative Data-Analyst turning raw data into actionable insights and business growth.
       </div>
