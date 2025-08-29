@@ -5,7 +5,7 @@
   <title>Transforming Raw Data into Business Gold</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-      body {
+    body {
       padding-top: 56px;
       margin: 0;
       height: 100vh;
@@ -21,51 +21,20 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       height: 56px;
-      background: rgba(20, 20, 35, 0.15);
+      background: rgba(20, 20, 35, 0.15);             
       backdrop-filter: blur(6px);
       color: #fff;
       text-align: center;
-      font-size: 1.5em;
+      font-size: 1.6em;
       font-weight: 700;
       line-height: 56px;
       letter-spacing: 1px;
-      box-shadow: 0 4px 20px rgba(255, 60, 60, 0.4);
-      text-shadow: 0 0 6px rgba(255, 60, 60, 0.65);
-      z-index: -100;
-    }
-    .container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 48px;
-      min-height: calc(100vh - 56px);
-      padding: 0 40px;
-      width: 100%;
-      max-width: 1100px;
-      box-sizing: border-box;
-    }
-
-    /* --- Top Panel --- */
-    .top-panel {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(20, 20, 35, 0.15);
-      backdrop-filter: blur(6px);
-      color: #fff;
-      text-align: center;
-      padding: 16px 0;
-      font-size: 1.6em;
-      font-weight: 700;
-      letter-spacing: 1px;
-      z-index: 30;
       box-shadow: 0 4px 25px rgba(255, 60, 60, 0.4);
       text-shadow: 0 0 8px rgba(255, 60, 60, 0.65);
+      z-index: 30;
     }
     .top-panel .highlight { color: #ff3c3c; }
 
-    /* --- Main Container --- */
     .container {
       display: flex;
       align-items: center;
@@ -76,13 +45,15 @@
       transition: opacity 0.5s;
       position: relative;
       padding-right: 200px;
+      width: 100%;
+      max-width: 1100px;
+      box-sizing: border-box;
     }
     .hidden { opacity: 0; pointer-events: none; }
     .main-content {
       max-width: 600px;
-      margin-top: -40px;   /* Moves the box up by 20px */
-      margin-bottom: 0; 
-      margin-left: -390px;
+      margin-top: -30px;
+      margin-left: -350px; /* Move main-content slightly left on desktop */
       background: rgba(40, 40, 60, 0.35);
       padding: 28px 32px;
       border-radius: 18px;
@@ -111,42 +82,37 @@
     }
     .projects-btn:hover { background: #ff3c3c; color: #fff; }
 
-    /* --- Avatar --- */
     .avatar-wrap {
       position: absolute;
-      right: 200px; /* moved slightly left */
+      right: 200px;
       top: 50%;
       transform: translateY(-50%);
       z-index: 10;
     }
-    
-.avatar-wrapper {
-  display: inline-block;
-  position: relative;
-  border-radius: 50%;
-  padding: 20px; /* Space for outermost border */
-  background: radial-gradient(circle, #7b1fa2 50%, #232238 100%);
-  border: 10px solid #43ea63; /* Outermost border color */
-  box-sizing: content-box;
-}
+    .avatar-wrapper {
+      display: inline-block;
+      position: relative;
+      border-radius: 50%;
+      padding: 20px;
+      background: radial-gradient(circle, #7b1fa2 50%, #232238 100%);
+      border: 10px solid #43ea63;
+      box-sizing: content-box;
+    }
+    .avatar {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      object-fit: cover;
+      background-image: url("AA.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 80px 10px #7b1fa267;
+      display: block;
+    }
 
-.avatar {
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  object-fit: cover;
-  background-image: url("AA.jpg"); /* Your photo */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 80px 10px #7b1fa267;
-  display: block;
-}
-
-
-    /* --- Sidebar --- */
     .sidebar {
       position: fixed;
       top: 100px;
@@ -173,13 +139,7 @@
       animation: glowPulse 3s infinite ease-in-out;
       position: relative;
     }
-    .sidebar-btn:hover {
-      background: #ff3c3c;
-      color: #fff;
-      box-shadow: 0 0 30px #ff3c3c, 0 0 60px #ff3c3c88;
-      transform: scale(1.15);
-      animation-play-state: paused;
-    }
+    .sidebar-btn:hover,
     .sidebar-btn.active {
       background: #ff3c3c;
       color: #fff;
@@ -209,7 +169,6 @@
       }
     }
 
-    /* --- Panels --- */
     .slide {
       position: fixed;
       top: 0; right: -100%;
@@ -239,12 +198,11 @@
     }
     .close-btn:hover { color: #fff; }
 
-    /* --- Contact Icons --- */
     .social-links {
       display: flex;
       gap: 26px;
       margin-top: 25px;
-      font-size: 2.2em; /* bigger */
+      font-size: 2.2em;
     }
     .social-links a {
       color: #ddd;
@@ -255,56 +213,106 @@
       transform: scale(1.25);
       text-shadow: 0 0 15px #ff3c3cbb;
     }
-    /* --- ADDED RESPONSIVE MEDIA QUERIES BELOW --- */
 
-    /* Mobile Phones: max width 600px */
+    /* Typing Animation for Business Gold */
+    .typing {
+      display: inline-block;
+      overflow: hidden;
+      border-right: 3px solid #ff3c3c;
+      white-space: nowrap;
+      vertical-align: bottom;
+      font-weight: 700;
+      font-size: 1em;
+      animation: typing 0.9s steps(18, end) infinite alternate,
+                 blink 0.7s step-end infinite;
+      color: #ff3c3c;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 15ch }
+    }
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    .circle-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: auto;
+    }
+    .rotating-circle {
+      position: absolute;
+      top: -14.5px;
+      left: 935px;
+      width: 330px;
+      height: 330px;
+      border-radius: 50%;
+      border: 6px solid #e22020;
+      border-top: 5px solid transparent;
+      box-sizing: border-box;
+      animation: rotateCircle 2s linear infinite;
+      transform-origin: 50% 50%;
+    }
+    @keyframes rotateCircle {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive */
     @media (max-width: 600px) {
       .container {
         flex-direction: column;
-        padding: 90px 16px 24px 16px;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 80px 8px 24px 8px;
         min-height: auto;
-        align-items: flex-start;
-        padding-right: 16px;
+        width: 100%;
+        max-width: 100vw;
+        box-sizing: border-box;
+      }
+      .main-content {
+        max-width: 100%;
+        margin: 0;
+        padding: 18px 8px;
+        border-radius: 14px;
+        box-shadow: 0 2px 18px rgba(0,0,0,0.25);
+        background: rgba(40, 40, 60, 0.55);
       }
       .avatar-wrap {
         position: static;
-        transform: none;
         margin: 24px auto 0 auto;
-        right: auto;
-        top: auto;
         display: flex;
         justify-content: center;
         width: 100%;
+        transform: none;
+        right: auto;
+        top: auto;
       }
       .avatar {
-        width: 170px;
-        height: 170px;
+        width: 140px;
+        height: 140px;
         margin: 0 auto;
       }
       .sidebar {
         position: fixed;
-        top: unset;
         bottom: 10px;
         right: 10px;
+        left: 0;
         flex-direction: row;
         gap: 12px;
-        width: 100%;
+        width: 100vw;
         justify-content: center;
-      }
-      .main-content {
-        max-width: 96%;
-        padding: 18px 8px;
+        z-index: 100;
       }
       .slide {
-        padding: 90px 10px 20px 10px;
+        padding: 80px 6px 20px 6px;
         font-size: 0.95em;
       }
       .slide h2, .slide h3 {
-        font-size: 1.4em;
+        font-size: 1.2em;
       }
     }
-
-    /* Tablets: max width 900px */
     @media (max-width: 900px) {
       .container {
         padding: 90px 25px 24px 25px;
@@ -330,6 +338,7 @@
       }
       .main-content {
         max-width: 98%;
+        margin: 0;
         padding: 18px 18px;
       }
       .slide {
@@ -337,61 +346,7 @@
         font-size: 1em;
       }
     }
-     /* Typing Animation for Business Gold */
-.typing {
-  display: inline-block;
-  overflow: hidden;
-  border-right: 3px solid #ff3c3c; /* Blinking cursor */
-  white-space: nowrap;
-  vertical-align: bottom; /* Fix alignment issue */
-  font-weight: 700;
-  font-size: 1em; /* Adjust to match heading */
-  animation: typing 0.9s steps(18, end) infinite alternate,
-             blink 0.7s step-end infinite;
-  color: #ff3c3c;
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 15ch } /* Adjust length (characters in "Business Gold" = 15) */
-}
-
-@keyframes blink {
-  50% { border-color: transparent }
-}
-
-  .circle-container {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  margin: auto;
-}
-
-.rotating-circle {
-  position: absolute;
-  top: -14.5px;
-  right:900;
-  left: 935px;     /* remove or set auto to avoid conflict */
-  width: 330px;
-  height: 330px;  
-  border-radius: 50%;
-  border: 6px solid #e22020;
-  border-top: 5px solid transparent;
-  box-sizing: border-box;
-  animation: rotateCircle 2s linear infinite;
-  transform-origin: 50% 50%;
-
-}
-
-
-@keyframes rotateCircle {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-
   </style>
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
@@ -399,11 +354,8 @@
     Veeramanikandan <span class="highlight">G</span>
   </div>
   <div class="circle-container">
-  <div class="rotating-circle"></div>
-</div>
-
-
-  <!-- Home Section -->
+    <div class="rotating-circle"></div>
+  </div>
   <div id="home-section" class="container">
     <div class="main-content">
       <h1>Transforming Raw Data <br />Into <span class="typing">Business Gold</span></h1>
@@ -417,8 +369,6 @@
       <img src="https://drive.google.com/uc?export=view&id=1w5Ifui8UzKrNylWeGdsyAcDLnMErIfNI" alt="Avatar" class="avatar"/>
     </div>
   </div>
-
-  <!-- Sidebar -->
   <div class="sidebar">
     <button class="sidebar-btn" onclick="clickButton(this,'home');goHome()" title="Home"><i class="fas fa-home"></i></button>
     <button class="sidebar-btn" onclick="clickButton(this,'about');openSlide('about')" title="About"><i class="fas fa-user"></i></button>
@@ -427,24 +377,23 @@
     <button class="sidebar-btn" onclick="clickButton(this,'projects');openSlide('projects')" title="Projects"><i class="fas fa-file-alt"></i></button>
     <button class="sidebar-btn" onclick="clickButton(this,'contact');openSlide('contact')" title="Contact"><i class="fas fa-envelope"></i></button>
   </div>
-
-  <!-- About -->
   <div id="about" class="slide">
     <button class="close-btn" onclick="goHome()" title="Close">&times;</button>
     <h2>About Me</h2>
-    <p>I’m a creative and detail-oriented Data Analyst passionate about transforming raw data into meaningful insights. With strong skills in Excel, SQL, Power BI, and data visualization, I enjoy uncovering patterns, solving complex problems, and helping businesses make smarter decisions. I thrive at the intersection of analytics and creativity, where I can turn numbers into clear stories that drive growth and innovation.</p>
+    <p>
+      I’m a creative and detail-oriented Data Analyst passionate about transforming raw data into meaningful insights. With strong skills in Excel, SQL, Power BI, and data visualization, I enjoy uncovering patterns, solving complex problems, and helping businesses make smarter decisions. I thrive at the intersection of analytics and creativity, where I can turn numbers into clear stories that drive growth and innovation.
+    </p>
   </div>
-
-  <!-- Key Skills -->
   <div id="keyskills" class="slide">
     <button class="close-btn" onclick="goHome()" title="Close">&times;</button>
     <h2>Key Skills</h2>
-    <h3>Languages & Tools:</h3><p>SQL, Python, Excel, MySQL, Power BI</p>
-    <h3>Platforms:</h3><p>PowerPoint, Jupyter Notebook, PyCharm</p>
-    <h3>Soft Skills:</h3><p>Communication, Problem-Solving, Critical Thinking, Collaboration, Adaptability, Time Management</p>
+    <h3>Languages & Tools:</h3>
+    <p>SQL, Python, Excel, MySQL, Power BI</p>
+    <h3>Platforms:</h3>
+    <p>PowerPoint, Jupyter Notebook, PyCharm</p>
+    <h3>Soft Skills:</h3>
+    <p>Communication, Problem-Solving, Critical Thinking, Collaboration, Adaptability, Time Management</p>
   </div>
-
-  <!-- Professional Experience -->
   <div id="professional" class="slide">
     <button class="close-btn" onclick="goHome()" title="Close">&times;</button>
     <h2>Professional Experience</h2>
@@ -455,8 +404,6 @@
     <h3>CNC Operator | Lucas TVS Ltd, Chennai | Apr 2017 – Oct 2018</h3>
     <p>Operated and maintained CNC machines, ensuring precision manufacturing and quality output.</p>
   </div>
-
-  <!-- Projects -->
   <div id="projects" class="slide">
     <button class="close-btn" onclick="goHome()" title="Close">&times;</button>
     <h2>My Projects</h2>
@@ -476,37 +423,27 @@
       <a class="projects-btn" href="https://github.com/Viratveeramani/POWER-BI---PROJECTS-FOR-PORTFOLIO/blob/main/dash%20board%20of%20Sales.png" target="_blank">View Project</a>
     </div>
   </div>
-
-  <!-- Contact -->
-<div id="contact" class="slide">
-  <button class="close-btn" onclick="goHome()" title="Close">&times;</button>
-  <h2>Contact Me</h2>
-  <p>Let’s connect! You can reach me via email or check out my professional profiles below:</p>
-
-  <div class="social-links">
-    <!-- GitHub -->
-    <a href="https://github.com/Viratveeramani" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-
-    <!-- LinkedIn -->
-    <a href="https://linkedin.com/in/veeramanikandan0678/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-  </div>
-
-  <!-- Email and Location lined up horizontally -->
-  <div style="display: flex; flex-wrap: wrap; gap: 28px; margin-top: 25px;">
-    <div style="display: flex; align-items: center; gap: 10px; color: #ff3c3c; font-size: 1.15em; text-shadow: 0 0 12px #ff3c3c;">
-      <i class="fas fa-envelope" aria-hidden="true"></i>
-      <a href="mailto:vmani0678@gmail.com" style="color: inherit; text-decoration: none;">vmani0678@gmail.com</a>
+  <div id="contact" class="slide">
+    <button class="close-btn" onclick="goHome()" title="Close">&times;</button>
+    <h2>Contact Me</h2>
+    <p>Let’s connect! You can reach me via email or check out my professional profiles below:</p>
+    <div class="social-links">
+      <a href="https://github.com/Viratveeramani" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/veeramanikandan0678/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
     </div>
-    <div style="display: flex; align-items: center; gap: 10px; color: #ff3c3c; font-size: 1.15em; text-shadow: 0 0 12px #ff3c3c;">
-      <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-      <a href="https://www.google.com/maps/place/Coimbatore,+Tamil+Nadu" target="_blank" style="color: inherit; text-decoration: none;">
-        Coimbatore, Tamil Nadu
-      </a>
+    <div style="display: flex; flex-wrap: wrap; gap: 28px; margin-top: 25px;">
+      <div style="display: flex; align-items: center; gap: 10px; color: #ff3c3c; font-size: 1.15em; text-shadow: 0 0 12px #ff3c3c;">
+        <i class="fas fa-envelope" aria-hidden="true"></i>
+        <a href="mailto:vmani0678@gmail.com" style="color: inherit; text-decoration: none;">vmani0678@gmail.com</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; color: #ff3c3c; font-size: 1.15em; text-shadow: 0 0 12px #ff3c3c;">
+        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+        <a href="https://www.google.com/maps/place/Coimbatore,+Tamil+Nadu" target="_blank" style="color: inherit; text-decoration: none;">
+          Coimbatore, Tamil Nadu
+        </a>
+      </div>
     </div>
   </div>
-</div>
-
-  <!-- Scripts -->
   <script>
     function openSlide(id) {
       document.getElementById("home-section").classList.add("hidden");
